@@ -1,0 +1,15 @@
+project_id = "quick-repair"
+
+[api]
+enabled = true
+
+[db]
+port = 54322
+
+[studio]
+port = 54323
+
+auth.enabled = true
+
+[functions.stripe-webhook]
+verify_jwt = false

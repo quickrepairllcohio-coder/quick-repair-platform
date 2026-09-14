@@ -1,0 +1,4 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {supabase} from '../../lib/supabase';
+export default function Payments(){const [rows,setRows]=useState<any[]>([]);useEffect(()=>{supabase.from('payments').select('id,job_id,amount,currency,status,provider_payment_id,created_at').order('created_at',{ascending:false}).limit(100).then(({data})=>setRows(data||[]))},[]);return <main style={{padding:24,fontFamily:'Arial'}}><h1>Payments</h1><table style={{width:'100%',borderCollapse:'collapse'}}><thead><tr>{['Payment','Job','Amount','Status','Provider ID','Created'].map(x=><th key={x} style={{textAlign:'left',padding:10,borderBottom:'1px solid #ddd'}}>{x}</th>)}</tr></thead><tbody>{rows.map(r=><tr key={r.id}>{[r.id,r.job_id,`${r.amount} ${r.currency}`,r.status,r.provider_payment_id||'—',new Date(r.created_at).toLocaleString()].map((x,i)=><td key={i} style={{padding:10,borderBottom:'1px solid #eee'}}>{x}</td>)}</tr>)}</tbody></table></main>}

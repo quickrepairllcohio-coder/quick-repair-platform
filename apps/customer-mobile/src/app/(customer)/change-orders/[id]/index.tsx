@@ -1,0 +1,7 @@
+﻿import { useEffect,useState } from 'react'
+import { View,Text,Pressable,StyleSheet,Alert } from 'react-native'
+import { useLocalSearchParams } from 'expo-router'
+import { supabase } from '../../../../lib/supabase'
+import { approveChangeOrder } from '../../../../lib/billing'
+export default function ChangeOrder(){const {id}=useLocalSearchParams<{id:string}>();const [x,setX]=useState<any>();const [busy,setBusy]=useState(false);const load=()=>supabase.from('change_orders').select('*').eq('id',id).single().then(({data})=>setX(data));useEffect(()=>{load();},[id]);if(!x)return <View style={s.c}><Text>Loading…</Text></View>;const approve=async()=>{setBusy(true);try{await approveChangeOrder(id);load()}catch(e:any){Alert.alert('Error',e.message)}finally{setBusy(false)}};return <View style={s.c}><Text style={s.h}>{x.change_order_number}</Text><Text style={s.p}>{x.description}</Text><Text>Status: {x.status}</Text><Text style={s.total}>${Number(x.total).toFixed(2)}</Text>{x.status==='sent'&&<Pressable disabled={busy} onPress={approve} style={s.btn}><Text style={s.bt}>{busy?'Working…':'Approve Change Order'}</Text></Pressable>}</View>}
+const s=StyleSheet.create({c:{flex:1,padding:24,gap:18},h:{fontSize:28,fontWeight:'800'},p:{fontSize:17,lineHeight:25},total:{fontSize:30,fontWeight:'800'},btn:{backgroundColor:'#111',padding:18,borderRadius:14},bt:{color:'#fff',textAlign:'center',fontWeight:'800'}})

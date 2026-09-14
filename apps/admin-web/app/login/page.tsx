@@ -1,0 +1,8 @@
+'use client'
+import { useState } from 'react'
+import { supabase } from '../../lib/supabase'
+export default function Login(){
+ const [email,setEmail]=useState('');const [password,setPassword]=useState('');const [loading,setLoading]=useState(false);const [error,setError]=useState('')
+ async function submit(e:React.FormEvent){e.preventDefault();setError('');if(!email.trim()||!password)return setError('Enter your work email and password.');setLoading(true);const {error}=await supabase.auth.signInWithPassword({email:email.trim(),password});setLoading(false);if(error)setError(error.message)}
+ return <main className="qr-login"><form className="qr-login-card" onSubmit={submit}><div className="qr-login-brand"><div className="qr-brand-mark">QR</div><div><div style={{fontWeight:850,fontSize:18}}>Quick Repair</div><div className="qr-muted" style={{fontSize:12}}>Operations workspace</div></div></div><div><div className="qr-kicker">Secure sign in</div><h1 className="qr-h1" style={{fontSize:28}}>Welcome back</h1><p className="qr-lead">Manage requests, technicians and jobs from one place.</p></div>{error&&<div className="qr-alert" style={{marginTop:18}}>{error}</div>}<label>Work email<input value={email} onChange={e=>setEmail(e.target.value)} autoComplete="email" inputMode="email" placeholder="you@company.com" /></label><label>Password<input value={password} onChange={e=>setPassword(e.target.value)} autoComplete="current-password" type="password" placeholder="Enter your password" /></label><button className="qr-btn qr-btn-primary" disabled={loading}>{loading?'Signing in…':'Sign in'}</button><p className="qr-muted" style={{fontSize:11,marginTop:14,lineHeight:1.5}}>Access is limited to authorized Quick Repair staff.</p></form></main>
+}

@@ -1,0 +1,9 @@
+node_modules/
+.expo/
+.next/
+.env
+.env.*
+!.env.example
+supabase/.branches/
+supabase/.temp/
+.DS_Store

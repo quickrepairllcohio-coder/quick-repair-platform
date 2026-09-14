@@ -1,0 +1,9 @@
+-- Manual staging checklist. Run with dedicated test accounts, not production users.
+-- 1) Customer cannot read another customer's request/property/job.
+-- 2) Technician cannot update a job assigned to another technician.
+-- 3) Technician cannot insert a location for another technician/job.
+-- 4) Customer can only read live location for their own active job.
+-- 5) Dispatcher can assign/reassign jobs according to role policy.
+-- 6) Finance can manage billing but cannot change technician role.
+-- 7) Admin/Super Admin can perform permitted staff operations.
+-- 8) Anonymous users cannot read any business data.

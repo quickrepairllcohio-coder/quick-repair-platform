@@ -1,0 +1,48 @@
+{
+  "name": "quick-repair",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:mobile": "npm --workspace apps/customer-mobile start",
+    "dev:admin": "npm --workspace apps/admin-web run dev",
+    "typecheck": "npm run typecheck --workspaces",
+    "supabase:start": "supabase start",
+    "supabase:reset": "supabase db reset",
+    "package:v0.6": "zip -qr ../quick-repair-v0.6-live-tracking.zip . -x \"node_modules/*\" \".git/*\"",
+    "package:v0.8": "zip -qr ../quick-repair-v0.8-billing-dispatch.zip . -x \"node_modules/*\" \".git/*\"",
+    "dev:customer": "npm --workspace apps/customer-mobile start",
+    "package:v1.1": "zip -qr ../quick-repair-v1.1-home-history.zip . -x \"node_modules/*\" \".git/*\"",
+    "test:db": "supabase test db",
+    "db:lint": "supabase db lint",
+    "verify:release": "bash scripts/verify-release.sh",
+    "ci": "npm run preflight && npm run v4.6:static && npm run typecheck && npm run verify:release && npm run db:lint && npm run test:db",
+    "package:v1.8": "zip -qr ../quick-repair-v1.8-financial-business-intelligence.zip . -x \"node_modules/*\" \".git/*\"",
+    "package:v2.1": "zip -qr ../quick-repair-v2.1-scheduling-fleet.zip . -x \"node_modules/*\" \".git/*\"",
+    "package:v2.2": "zip -qr ../quick-repair-v2.2-dispatch-intelligence.zip . -x \"node_modules/*\" \".git/*\"",
+    "package:v3.1": "zip -qr ../quick-repair-v3.1-revenue-resilience.zip . -x \"node_modules/*\" \".git/*\"",
+    "mobile:doctor": "bash scripts/mobile-build-check.sh",
+    "build:customer:preview": "npm --workspace apps/customer-mobile exec eas build --platform all --profile preview",
+    "build:technician:preview": "npm --workspace apps/technician-mobile exec eas build --platform all --profile preview",
+    "build:customer:production": "npm --workspace apps/customer-mobile exec eas build --platform all --profile production",
+    "build:technician:production": "npm --workspace apps/technician-mobile exec eas build --platform all --profile production",
+    "production:mobile-check": "bash scripts/production-integration-check.sh",
+    "staging:e2e-check": "bash scripts/staging-e2e-check.sh",
+    "staging:config-check": "bash scripts/staging-config-check.sh",
+    "build:customer:staging": "npm --workspace apps/customer-mobile exec eas build --platform all --profile staging",
+    "build:technician:staging": "npm --workspace apps/technician-mobile exec eas build --platform all --profile staging",
+    "store:release-check": "bash scripts/store-release-check.sh",
+    "release:check": "npm run preflight && npm run store:release-check && npm run staging:e2e-check && npm run production:mobile-check",
+    "preflight": "bash scripts/preflight.sh",
+    "package:v4.6": "zip -qr ../quick-repair-v4.6-production-ready.zip . -x \"node_modules/*\" \".git/*\"",
+    "v4.6:static": "bash scripts/v4-6-static-validation.sh"
+  },
+  "packageManager": "npm@10.9.2",
+  "version": "4.6.0",
+  "engines": {
+    "node": ">=22.13.0 <23",
+    "npm": ">=10.9.0 <11"
+  }
+}

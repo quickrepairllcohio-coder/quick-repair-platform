@@ -1,0 +1,2 @@
+'use client';
+export default function LedgerPage(){return <main style={{padding:24,fontFamily:'sans-serif'}}><h1>General Ledger</h1><p>Double-entry ledger foundation is enabled. Every posted journal entry must have equal debits and credits.</p><ul><li>Cash / AR / deposits</li><li>Service revenue</li><li>Materials and labor expense</li><li>Processing and marketing expense</li></ul><p>Production posting should be performed through secured server-side workflows.</p></main>}

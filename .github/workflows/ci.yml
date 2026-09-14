@@ -1,0 +1,32 @@
+name: Quick Repair CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+      - run: npm install --no-audit --no-fund
+      - run: npm run preflight
+      - run: npm run v4.6:static
+      - run: npm run typecheck
+      - run: bash scripts/verify-release.sh
+
+  database:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.117.0
+      - run: supabase start
+      - run: supabase db reset
+      - run: supabase db lint
+      - run: supabase test db
