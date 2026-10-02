@@ -1,31 +1,36 @@
 {
-"expo": {
-"name": "QuickRepair Client",
-"slug": "quick-repair-client",
-"version": "1.0.0",
-"orientation": "portrait",
-"icon": "./assets/icon.png",
-"userInterfaceStyle": "dark",
-"ios": {
-  "supportsTablet": true,
-  "bundleIdentifier": "com.quickrepair.client"
-},
-"android": {
-  "adaptiveIcon": {
-    "foregroundImage": "./assets/adaptive-icon.png",
-    "backgroundColor": "#0F172A"
-  },
-  "package": "com.quickrepair.client"
-},
-"plugins": [
-  [
-    "expo-splash-screen",
-    {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#0F172A"
+  "expo": {
+    "name": "QuickRepair Client",
+    "slug": "quick-repair-client",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.quickrepair.client"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0F172A"
+      },
+      "package": "com.quickrepair.client"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#0F172A"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5cb9faef-f4ef-4b52-8058-4cd10efd1d07"
+      }
     }
-  ]
-]
-}
+  }
 }

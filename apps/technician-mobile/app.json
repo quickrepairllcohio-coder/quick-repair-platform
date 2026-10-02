@@ -1,0 +1,36 @@
+{
+"expo": {
+"name": "QuickRepair Tech",
+"slug": "quick-repair-technician",
+"version": "1.0.0",
+"orientation": "portrait",
+"icon": "./assets/icon.png",
+"userInterfaceStyle": "dark",
+"ios": {
+  "supportsTablet": true,
+  "bundleIdentifier": "com.quickrepair.tech"
+},
+"android": {
+  "adaptiveIcon": {
+    "foregroundImage": "./assets/adaptive-icon.png",
+    "backgroundColor": "#0F172A"
+  },
+  "package": "com.quickrepair.tech"
+},
+"plugins": [
+  [
+    "expo-splash-screen",
+    {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F172A"
+    }
+  ]
+],
+"extra": {
+  "eas": {
+    "projectId": "f0389ca3-7813-41aa-9c24-467433208b18"
+  }
+}
+}
+}

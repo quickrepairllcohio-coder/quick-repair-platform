@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "4ad55078-ba2d-400c-862e-d8300016ad5e"
+      }
+    },
+    "owner": "quickrepair",
+    "android": {
+      "package": "com.quickrepair.quickrepair"
+    }
+  }
+}

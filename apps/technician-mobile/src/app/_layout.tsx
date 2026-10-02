@@ -1,20 +1,45 @@
-import { Stack, Redirect } from 'expo-router';
-import { useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React, { useEffect } from 'react';
+import { Slot, useRouter, useSegments } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { View, ActivityIndicator } from 'react-native';
 import { AuthProvider, useAuth } from '../providers/AuthProvider';
-import { appTheme } from '../lib/theme';
-import { registerForPushNotifications } from '../lib/notifications';
 
-function RootNavigator() {
+function RootLayoutNav() {
   const { session, loading } = useAuth();
-  useEffect(() => { if (session) { registerForPushNotifications().catch(() => undefined); } }, [session]);
-  if (loading) return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: appTheme.colors.background }}><ActivityIndicator color={appTheme.colors.primary} /></View>;
-  if (!session) return <Redirect href="/(auth)/login" />;
-  return <Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }} />;
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading) return;
+    const inAuthGroup = segments[0] === '(auth)';
+
+    if (!session && !inAuthGroup) {
+      router.replace('/(auth)/login');
+    } else if (session && inAuthGroup) {
+      router.replace('/');
+    }
+  }, [session, loading, segments]);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#090E17', justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#10B981" />
+      </View>
+    );
+  }
+
+  return (
+    <>
+      <StatusBar style="light" />
+      <Slot />
+    </>
+  );
 }
 
 export default function RootLayout() {
-  return <SafeAreaProvider><PaperProvider theme={appTheme}><AuthProvider><RootNavigator /></AuthProvider></PaperProvider></SafeAreaProvider>;
+  return (
+    <AuthProvider>
+      <RootLayoutNav />
+    </AuthProvider>
+  );
 }

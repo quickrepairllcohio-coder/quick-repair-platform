@@ -1,4 +1,4 @@
-module.exports = ({ config }) => ({
+﻿module.exports = ({ config }) => ({
   ...config,
   name: 'Quick Repair',
   slug: 'quick-repair',
@@ -26,6 +26,8 @@ module.exports = ({ config }) => ({
     'expo-router',
     'expo-secure-store',
     'expo-notifications',
+    'expo-status-bar',
+    'expo-font',
     ['react-native-maps', {
       androidGoogleMapsApiKey: process.env.GOOGLE_MAPS_ANDROID_API_KEY || undefined,
       iosGoogleMapsApiKey: process.env.GOOGLE_MAPS_IOS_API_KEY || undefined,
@@ -36,6 +38,6 @@ module.exports = ({ config }) => ({
   ],
   extra: {
     ...config.extra,
-    eas: { projectId: process.env.EXPO_PROJECT_ID || config.extra?.eas?.projectId },
+    eas: { projectId: process.env.EXPO_PROJECT_ID || '4ad55078-ba2d-400c-862e-d8300016ad5e' },
   },
 });

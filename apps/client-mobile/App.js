@@ -1,6 +1,5 @@
-import React from 'react';
+import { registerRootComponent } from 'expo';
 import ClientMainApp from './src/app/index';
 
-export default function App() {
-return <ClientMainApp />;
-}
+// این دستور اپلیکیشن مشتری را به عنوان هسته اصلی به اندروید معرفی می‌کند
+registerRootComponent(ClientMainApp);
